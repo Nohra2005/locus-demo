@@ -14,7 +14,7 @@ for p in 80 443; do
   sudo iptables -C INPUT -p tcp --dport $p -j ACCEPT 2>/dev/null || \
     sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport $p -j ACCEPT
 done
-sudo apt-get install -y -qq iptables-persistent >/dev/null 2>&1 || true
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq iptables-persistent >/dev/null 2>&1 || true
 sudo netfilter-persistent save >/dev/null 2>&1 || true
 
 echo "== App files"
@@ -28,6 +28,8 @@ DOMAIN="${DOMAIN:-$(echo "$IP" | tr . -).sslip.io}"
 [ -f .env ] || touch .env
 grep -q '^DOMAIN=' .env || echo "DOMAIN=$DOMAIN" >> .env
 chmod 600 .env
+
+if [ "${NO_START:-0}" = 1 ]; then echo "Setup done (start skipped)"; exit 0; fi
 
 echo "== Start"
 sudo docker compose --env-file .env pull

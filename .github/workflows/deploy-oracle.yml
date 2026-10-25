@@ -7,7 +7,8 @@ name: Deploy to Oracle
 # One-time setup (repo Settings > Secrets and variables > Actions):
 #   secret   ORACLE_SSH_KEY  private key for the VM's "ubuntu" user
 #   variable ORACLE_HOST     the VM's public IP
-# Until ORACLE_HOST is set, only the image is published.
+# Until ORACLE_HOST is set, only the image is published. The first deploy
+# also runs deploy/oracle/setup.sh on the VM, so no manual SSH is needed.
 
 on:
   workflow_run:
@@ -49,16 +50,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Restart Locus on the VM with the new image
+      - name: Set up the VM (first run) and restart Locus with the new image
         env:
           SSH_KEY: ${{ secrets.ORACLE_SSH_KEY }}
           HOST: ${{ vars.ORACLE_HOST }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GHCR_USER: ${{ github.actor }}
         run: |
           echo "$SSH_KEY" > key && chmod 600 key
+          SSH="ssh -i key -o StrictHostKeyChecking=no ubuntu@$HOST"
+          # Idempotent: installs Docker, opens ports 80/443, writes ~/locus/.env with the sslip.io domain
+          $SSH 'NO_START=1 bash -s' < deploy/oracle/setup.sh
           scp -i key -o StrictHostKeyChecking=no deploy/oracle/docker-compose.yml deploy/oracle/Caddyfile ubuntu@$HOST:~/locus/
-          ssh -i key -o StrictHostKeyChecking=no ubuntu@$HOST \
-            'cd ~/locus && sudo docker compose --env-file .env pull && sudo docker compose --env-file .env up -d && sudo docker image prune -f'
+          # The image is private on GHCR: log in for this pull only, then log out
+          echo "$GHCR_TOKEN" | $SSH "sudo docker login ghcr.io -u $GHCR_USER --password-stdin"
+          $SSH 'cd ~/locus && sudo docker compose --env-file .env pull && sudo docker compose --env-file .env up -d && sudo docker image prune -f; sudo docker logout ghcr.io'
           rm key
+
       - name: End-to-end tests against the live site
         env:
           HOST: ${{ vars.ORACLE_HOST }}
