@@ -1,4 +1,6 @@
 {
   "_comment": "Stores the catalog is rebuilt from (scripts/build_catalog.py). 'store' must match a store_name in gateway/users.json so results show on the map. Shopify stores: use the homepage or a /collections/... URL.",
-  "stores": []
+  "stores": [
+    {"store": "Forever21", "mall": "City Centre Beirut", "url": "https://www.forever21.com/"}
+  ]
 }
