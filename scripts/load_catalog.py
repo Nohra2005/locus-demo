@@ -33,6 +33,11 @@ def main():
         print(f"[catalog] {DATA} not found, starting with an empty catalog")
         return
 
+    with open(DATA, "rb") as f:
+        if f.read(2) != b"\x1f\x8b":
+            raise SystemExit(f"[catalog] {DATA} is not a gzip file (a Git LFS pointer?). "
+                             "Re-download the repo or run: git lfs pull")
+
     batch, totals = [], {}
 
     def flush():
