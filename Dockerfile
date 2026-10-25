@@ -53,14 +53,15 @@ COPY --chown=user --from=frontend /frontend/dist ./gateway/frontend/dist
 
 USER user
 
-# Download the model weights at build time so a cold start only loads them
-RUN cd visual_engine && python -c "\
-from huggingface_hub import hf_hub_download; \
-hf_hub_download('Bingsu/adetailer', 'deepfashion2_yolov8s-seg.pt'); \
-from transformers import CLIPModel, CLIPProcessor; \
-CLIPModel.from_pretrained('patrickjohncyh/fashion-clip'); \
-CLIPProcessor.from_pretrained('patrickjohncyh/fashion-clip'); \
-from ultralytics import YOLOWorld; YOLOWorld('yolov8s-worldv2.pt').set_classes(['shoe'])"
+# Download every model the visual engine uses (DeepFashion2 YOLO, YOLO-World and
+# its CLIP text encoder, Fashion-CLIP, MiniLM) by loading it once at build time,
+# so a cold start only reads them from disk
+RUN cd visual_engine && python -c "from vectorizer import LocusVisualizer; LocusVisualizer()"
+
+# Weights are baked in above: never call the Hub at runtime (faster cold start)
+ENV HF_HUB_OFFLINE=1 \
+    TRANSFORMERS_OFFLINE=1 \
+    YOLO_OFFLINE=1
 
 ENV QDRANT_HOST=127.0.0.1 \
     QDRANT_PORT=6333 \
