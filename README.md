@@ -12,13 +12,19 @@ Built by **Tatiana Nohra** with **Marc El Nawar** for AI in Industry (EECE 503N)
 
 ## Results
 
-Measured on a hand-labelled set of 35 search photos (`mlops/golden_dataset.json`):
+Measured on a hand-labelled set of 35 search photos (`mlops/golden_dataset.json`), on the original Azure deployment (course report, `report/locus_report.tex`):
 
 | Search method | Right product in top 5 | MRR |
 |---|---|---|
 | Random | 3% | 0.01 |
 | Keyword search on product titles and tags | 12% | 0.08 |
 | **Locus (Fashion-CLIP image embeddings)** | **97%** | **0.91** |
+
+The original database was deleted after the course, so the catalog is rebuilt from the stores' websites (`scripts/build_catalog.py`, run by the *Rebuild catalog* workflow). To check the numbers on the current catalog:
+
+```bash
+python mlops/eval_retrieval.py --gateway-url http://localhost:7860 --delay 6.5
+```
 
 Median search time is under 2 seconds on a 2-core CPU machine.
 
@@ -87,9 +93,9 @@ The Azure deployment cost about $40 a month, so it is shut down. This demo runs 
 ## What the demo changes
 
 - One container instead of four Kubernetes deployments (`Dockerfile`, `start.sh`).
-- Qdrant runs inside the container. The catalog is loaded at startup from `data/catalog.jsonl.gz`.
+- Qdrant runs inside the container. The catalog is loaded at startup from `data/catalog.jsonl.gz`, which the *Rebuild catalog* workflow creates by scraping the stores in `data/stores.json` and embedding every product with the real visual engine.
 - `gateway/demo_app.py` blocks store admin, catalog editing and retraining endpoints, so visitors can search but cannot change the catalog. `gateway/main.py` is unchanged.
-- The attribute tagger and LLM judge only run if an `OPENROUTER_API_KEY` secret is set on the Space. Visual search works without it.
+- The LLM judge scores the top results of a search in **one** call (`gateway/judge_batched.py`) instead of one call per result, so it fits free-tier quotas. Gemini is tried first and Groq second, each with per-minute and per-day caps (`shared/free_llm.py`). With no key set, or when the budget is used up, results keep their CLIP score and search is unaffected. `GET /llm-status` shows the remaining budget.
 
 ## Run it yourself
 
@@ -99,7 +105,7 @@ docker run -p 7860:7860 locus
 # open http://localhost:7860
 ```
 
-Optional: `-e OPENROUTER_API_KEY=...` turns on attribute tagging and the judge.
+Optional: `-e GOOGLE_API_KEY=... -e GROQ_API_KEY=...` turns on attribute tagging and the judge.
 
 ## Stack
 

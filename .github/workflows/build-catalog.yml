@@ -1,0 +1,58 @@
+name: Rebuild catalog
+
+# Scrapes every store in data/stores.json, embeds the products with the real
+# visual engine, and commits the result as data/catalog.jsonl.gz.
+# The demo loads that file at startup, so it needs no hosted database.
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_per_store:
+        description: "Max products per store (0 = all)"
+        default: "0"
+  schedule:
+    - cron: "0 2 * * 1"   # Mondays 02:00 UTC, keeps prices and stock fresh
+
+permissions:
+  contents: write
+
+jobs:
+  build-catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Free disk space for the torch image
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+
+      - name: Build the image
+        run: docker build -t locus-demo .
+
+      - name: Start the stack with admin endpoints enabled (local only)
+        run: |
+          docker run -d --name locus -p 7860:7860 -p 6333:6333 -e DEMO_MODE=0 locus-demo
+          timeout 900 bash -c 'until curl -sf http://localhost:7860/health >/dev/null; do sleep 10; done'
+
+      - name: Scrape and embed every store
+        run: |
+          pip install requests qdrant-client==1.10.0
+          GATEWAY_URL=http://localhost:7860 python scripts/build_catalog.py \
+            --max-per-store "${{ github.event.inputs.max_per_store || '0' }}"
+
+      - name: Export the catalog
+        run: QDRANT_URL=http://localhost:6333 python scripts/export_catalog.py
+
+      - name: Commit the catalog
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/catalog.jsonl.gz
+          git commit -m "Rebuild catalog ($(date -u +%Y-%m-%d))" || echo "No changes"
+          git push
+
+      - name: Container logs on failure
+        if: failure()
+        run: docker logs locus 2>&1 | tail -150

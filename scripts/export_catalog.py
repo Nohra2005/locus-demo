@@ -27,6 +27,13 @@ COLLECTIONS = ["locus_items"]
 OUT = pathlib.Path(__file__).resolve().parent.parent / "data" / "catalog.jsonl.gz"
 
 
+def _round(v):
+    """Six decimals keeps cosine search identical in practice and halves the file."""
+    if isinstance(v, dict):
+        return {k: _round(x) for k, x in v.items()}
+    return [round(x, 6) for x in v]
+
+
 def vector_config(info):
     vectors = info.config.params.vectors
     if hasattr(vectors, "size"):
@@ -52,7 +59,12 @@ def main():
                     with_payload=True, with_vectors=True,
                 )
                 for p in points:
-                    f.write(json.dumps({"c": name, "id": p.id, "v": p.vector, "p": p.payload}) + "\n")
+                    payload = dict(p.payload or {})
+                    url = payload.get("image_url", "")
+                    if "/golden-dataset/images/" in url:
+                        # served by the gateway itself: store a relative path
+                        payload["image_url"] = "/golden-dataset/images/" + url.rsplit("/", 1)[-1]
+                    f.write(json.dumps({"c": name, "id": p.id, "v": _round(p.vector), "p": payload}) + "\n")
                 count += len(points)
                 print(f"  {name}: {count} points", end="\r")
                 if offset is None:
