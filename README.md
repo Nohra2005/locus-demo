@@ -20,7 +20,14 @@ Measured on a hand-labelled set of 35 search photos (`mlops/golden_dataset.json`
 | Keyword search on product titles and tags | 12% | 0.08 |
 | **Locus (Fashion-CLIP image embeddings)** | **97%** | **0.91** |
 
-The original database was deleted after the course, so the catalog is rebuilt from the stores' websites (`scripts/build_catalog.py`, run by the *Rebuild catalog* workflow). To check the numbers on the current catalog:
+The original database was deleted after the course, so the catalog is rebuilt from the stores' websites (`scripts/build_catalog.py`, run by the *Rebuild catalog* workflow). On the rebuilt catalog (1,666 products, October 2026) the same test gives the same result:
+
+| Catalog | Right product in top 5 | MRR | NDCG@5 |
+|---|---|---|---|
+| Original (Azure, 2026 course) | 97% | 0.91 | |
+| Rebuilt (Forever21 + test set, Oct 2026) | 97% (34 of 35) | 0.89 | 0.90 |
+
+To check the numbers yourself:
 
 ```bash
 python mlops/eval_retrieval.py --gateway-url http://localhost:7860 --delay 6.5
