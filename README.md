@@ -2,7 +2,7 @@
 
 Take a photo of an outfit, tap the item you want, and Locus finds similar products in stores near you.
 
-**Watch it:** [53-second demo video](docs/locus-demo.mp4). **Run it:** one Docker command, see [Run it yourself](#run-it-yourself). There is no hosted link, to avoid paying for a server that sits idle.
+**Quick look:** [53-second demo video](docs/locus-demo.mp4). **Full evaluation:** build it on your own machine with Docker (steps below, [Run it yourself](#run-it-yourself)). I'm a student with no budget for hosting, so there is no live link, but everything runs locally from this repo.
 
 
 Built by **Tatiana Nohra** with **Marc El Nawar** for AI in Industry (EECE 503N) at the American University of Beirut. **This is the free, runnable version.** The original course repo, with the full commit history, the report and the Kubernetes/monitoring setup, is [Nohra2005/locus](https://github.com/Nohra2005/locus).
@@ -106,11 +106,17 @@ The Azure deployment cost about $40 a month, so it is shut down. This demo runs 
 
 ## Run it yourself
 
+Needs Docker and about 8 GB of free RAM. The first build takes several minutes because it downloads and bakes in the models; after that, start-up takes about a minute.
+
 ```bash
+git clone https://github.com/Nohra2005/locus-demo
+cd locus-demo
 docker build -t locus .
 docker run -p 7860:7860 locus
 # open http://localhost:7860
 ```
+
+To check the accuracy numbers above, run the evaluation command from the Results section against the running container.
 
 Optional: `-e GOOGLE_API_KEY=... -e GROQ_API_KEY=...` turns on attribute tagging and the judge.
 
