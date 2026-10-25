@@ -1,0 +1,18 @@
+{
+  "score": 0.6546,
+  "n_queries": 33,
+  "model": "google/gemini-2.0-flash-001",
+  "per_category": {
+    "bag": 0.56,
+    "dress": 0.68,
+    "hat": 0.61,
+    "jacket": 0.64,
+    "jumpsuit": 0.67,
+    "leggings": 0.72,
+    "pants": 0.70,
+    "shoes": 0.55,
+    "skirt": 0.63,
+    "sweater": 0.66,
+    "top": 0.65
+  }
+}

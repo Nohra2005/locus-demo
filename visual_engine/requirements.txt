@@ -1,0 +1,17 @@
+# torch, torchvision, ultralytics are pre-installed in the Dockerfile
+# with --index-url https://download.pytorch.org/whl/cpu (CPU-only wheels).
+# Do NOT list them here — pip would pull the default-index CUDA wheel and
+# either bloat the image or fail on CPU-only hosts.
+#
+# Local dev: pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+#            pip install ultralytics
+transformers>=4.48.0
+sentence-transformers
+Pillow
+fastapi
+uvicorn
+python-multipart
+huggingface_hub
+prometheus-fastapi-instrumentator
+openai-clip
+peft>=0.10.0

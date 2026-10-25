@@ -1,0 +1,10 @@
+FROM python:3.11-slim
+
+WORKDIR /mlops
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --timeout 300 --retries 5 prometheus_client mlflow
+
+COPY mlops/ /mlops/
+
+CMD ["python", "metrics_exporter.py"]

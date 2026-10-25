@@ -1,0 +1,51 @@
+name: Deploy to Hugging Face Space
+
+# Mirrors main to the Hugging Face Space (which rebuilds the Docker image),
+# then runs the end-to-end tests against the live demo.
+#
+# Setup once: repo Settings > Secrets > Actions
+#   HF_TOKEN  a Hugging Face write token
+# and repo Settings > Variables > Actions
+#   HF_SPACE  e.g. TatianaNohra/locus
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    if: ${{ vars.HF_SPACE != '' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Add the Space config header to the README
+        run: |
+          cat space_header.yml README.md > README.tmp && mv README.tmp README.md
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git commit -am "Space config" -q
+
+      - name: Push to the Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_SPACE: ${{ vars.HF_SPACE }}
+        run: |
+          git push --force "https://user:${HF_TOKEN}@huggingface.co/spaces/${HF_SPACE}" HEAD:main
+
+      - name: Wait for the Space to rebuild, then run E2E tests on it
+        env:
+          HF_SPACE: ${{ vars.HF_SPACE }}
+        run: |
+          URL="https://$(echo "$HF_SPACE" | tr '/' '-' | tr '[:upper:]' '[:lower:]').hf.space"
+          echo "Space URL: $URL"
+          sleep 120
+          timeout 1800 bash -c "until curl -sf $URL/health >/dev/null; do sleep 20; done"
+          pip install pytest requests pillow
+          GATEWAY_URL=$URL pytest tests/test_e2e.py -v

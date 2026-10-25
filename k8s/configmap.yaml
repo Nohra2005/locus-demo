@@ -1,0 +1,17 @@
+# LOCUS: configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: locus-config
+data:
+  # NOTE: QDRANT_URL contains the cluster ID — consider moving to locus-secrets.
+  QDRANT_URL: "https://7aaeeac4-b452-4685-8e6e-d788a362a7f1.europe-west3-0.gcp.cloud.qdrant.io:6333"
+  GATEWAY_BASE_URL: "http://20.240.203.22:30800"
+  # Set to GitHub Pages URL once partner deploys frontend (e.g. https://username.github.io/locus)
+  CORS_ORIGINS: "*"
+  VISUAL_HOST: "http://visual-engine:8001"
+  TAGGER_HOST: "http://attribute-tagger:8004"
+  MLFLOW_TRACKING_URI: "http://20.240.203.22:5000"
+  GOLDEN_DATASET_PATH: "/mlops/golden_dataset.json"
+  METRICS_PORT: "8003"
+  REFRESH_SECS: "30"

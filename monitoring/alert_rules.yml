@@ -1,0 +1,105 @@
+groups:
+  - name: locus_alerts
+    rules:
+
+      # ── Service availability ──────────────────────────────────────────────────
+      - alert: GatewayDown
+        expr: up{job="gateway"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Gateway is down"
+          description: "The Locus gateway (port 8000) has been unreachable for 1 minute."
+
+      - alert: VisualEngineDown
+        expr: up{job="visual_engine"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Visual Engine is down"
+          description: "The visual engine (port 8001) has been unreachable for 1 minute."
+
+      - alert: AttributeTaggerDown
+        expr: up{job="attribute_tagger"} == 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Attribute Tagger is down"
+          description: "The attribute tagger (port 8004) has been unreachable for 2 minutes. Search still works but attributes will be missing."
+
+      - alert: MLopsExporterDown
+        expr: up{job="mlops_exporter"} == 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "MLops Exporter is down"
+          description: "The MLops metrics exporter (port 8003) has been unreachable for 2 minutes. Recall and LoRA metrics will go stale."
+
+      # ── Error rate ────────────────────────────────────────────────────────────
+      - alert: HighGatewayErrorRate
+        expr: |
+          sum(rate(http_requests_total{status_code=~"5.."}[5m]))
+          /
+          sum(rate(http_requests_total[5m])) > 0.05
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Gateway 5xx error rate above 5%"
+          description: "More than 5% of requests are returning 5xx errors over the last 5 minutes."
+
+      # ── Latency ───────────────────────────────────────────────────────────────
+      - alert: HighSearchLatencyP95
+        expr: |
+          histogram_quantile(0.95,
+            rate(http_request_duration_seconds_bucket{handler="/search"}[5m])
+          ) > 10
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Search P95 latency above 10s"
+          description: "The 95th percentile search latency has exceeded 10 seconds for 2 minutes."
+
+      # ── ML quality ───────────────────────────────────────────────────────────
+      - alert: LowRecallAtFive
+        expr: locus_recall_at_5 < 0.9
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Recall@5 dropped below 0.9"
+          description: "The golden-dataset Recall@5 is {{ $value | humanizePercentage }}, below the 0.9 threshold."
+
+      # ── Data health ───────────────────────────────────────────────────────────
+      - alert: HighCorruptItems
+        expr: locus_corrupt_items_total > 50
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "More than 50 corrupt products flagged"
+          description: "{{ $value }} products have a corrupt_flag_count >= 1 in the catalog."
+
+      - alert: BrokenLinksDetected
+        expr: locus_link_monitor_broken_total > 0
+        for: 1m
+        labels:
+          severity: info
+        annotations:
+          summary: "Broken product image links detected"
+          description: "The last link health check found {{ $value }} broken product URLs."
+
+      # ── Traffic ───────────────────────────────────────────────────────────────
+      - alert: NoSearchTraffic
+        expr: sum(rate(locus_searches_total[10m])) == 0
+        for: 30m
+        labels:
+          severity: info
+        annotations:
+          summary: "No search traffic for 30 minutes"
+          description: "Zero search requests have been recorded in the last 30 minutes."

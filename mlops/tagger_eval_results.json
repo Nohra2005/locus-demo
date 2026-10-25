@@ -1,0 +1,927 @@
+[
+  {
+    "category": "pants",
+    "name": "blue high waisted straight leg jeans",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 2.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 2.0
+    },
+    "old_raw": {
+      "colors": [
+        "dark blue"
+      ],
+      "style": "casual",
+      "silhouette": "wide-leg jeans",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "denim",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "navy blue"
+      ],
+      "style": "casual",
+      "silhouette": "wide-leg jeans",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "denim",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  },
+  {
+    "category": "pants",
+    "name": "Beige Linen Wide leg trousers",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "ivory"
+      ],
+      "style": "minimalist",
+      "silhouette": "wide-leg trousers",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "linen",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "ivory"
+      ],
+      "style": "minimalist",
+      "silhouette": "wide-leg pants",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "linen",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  },
+  {
+    "category": "dress",
+    "name": "white floral wrap midi dress",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "ivory",
+        "pink",
+        "green"
+      ],
+      "style": "romantic",
+      "silhouette": "flowy midi dress",
+      "occasion": [
+        "date night",
+        "weekend"
+      ],
+      "pattern": "floral",
+      "material_feel": "chiffon",
+      "trend_tags": [
+        "cottagecore"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "pink",
+        "white",
+        "green"
+      ],
+      "style": "romantic",
+      "silhouette": "wrap midi dress",
+      "occasion": [
+        "date night",
+        "weekend"
+      ],
+      "pattern": "floral",
+      "material_feel": "chiffon",
+      "trend_tags": [
+        "cottagecore"
+      ]
+    }
+  },
+  {
+    "category": "dress",
+    "name": "Camel knit mini dress",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "camel"
+      ],
+      "style": "classic",
+      "silhouette": "fitted sweater dress",
+      "occasion": [
+        "casual",
+        "date night"
+      ],
+      "pattern": "geometric",
+      "material_feel": "knitwear",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "camel"
+      ],
+      "style": "classic",
+      "silhouette": "fitted sweater dress",
+      "occasion": [
+        "casual",
+        "office"
+      ],
+      "pattern": "solid",
+      "material_feel": "knitwear",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  },
+  {
+    "category": "top",
+    "name": "white ribbed halter neck crop top",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.333
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 0.857,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "white",
+        "light gray",
+        "black"
+      ],
+      "style": "casual",
+      "silhouette": "fitted tank top",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "cotton",
+      "trend_tags": [
+        "minimalist"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "white"
+      ],
+      "style": "casual",
+      "silhouette": "fitted tank top",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "cotton",
+      "trend_tags": []
+    }
+  },
+  {
+    "category": "top",
+    "name": "beige camisole top",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "camel"
+      ],
+      "style": "romantic",
+      "silhouette": "loose camisole",
+      "occasion": [
+        "casual",
+        "date night"
+      ],
+      "pattern": "solid",
+      "material_feel": "satin",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "camel"
+      ],
+      "style": "romantic",
+      "silhouette": "relaxed camisole",
+      "occasion": [
+        "date night",
+        "evening"
+      ],
+      "pattern": "solid",
+      "material_feel": "satin",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  },
+  {
+    "category": "jacket",
+    "name": "camel longline wool coat",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "camel"
+      ],
+      "style": "classic",
+      "silhouette": "fitted coat",
+      "occasion": [
+        "office",
+        "formal event"
+      ],
+      "pattern": "solid",
+      "material_feel": "wool",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "camel"
+      ],
+      "style": "classic",
+      "silhouette": "fitted coat",
+      "occasion": [
+        "office",
+        "formal event"
+      ],
+      "pattern": "solid",
+      "material_feel": "wool",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  },
+  {
+    "category": "jacket",
+    "name": "brown leather biker jacket",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 0.857,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 0.857,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "camel"
+      ],
+      "style": "edgy",
+      "silhouette": "fitted jacket",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "leather",
+      "trend_tags": []
+    },
+    "new_raw": {
+      "colors": [
+        "camel"
+      ],
+      "style": "edgy",
+      "silhouette": "fitted jacket",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "leather",
+      "trend_tags": []
+    }
+  },
+  {
+    "category": "sweater",
+    "name": "cream chunky knit oversized sweater",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "ivory"
+      ],
+      "style": "casual",
+      "silhouette": "oversized sweater",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "knitwear",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "ivory"
+      ],
+      "style": "casual",
+      "silhouette": "relaxed knit sweater",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "knitwear",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  },
+  {
+    "category": "sweater",
+    "name": "brown open front cardigan",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 2.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 2.0
+    },
+    "old_raw": {
+      "colors": [
+        "chocolate brown"
+      ],
+      "style": "minimalist",
+      "silhouette": "fitted cardigan",
+      "occasion": [
+        "casual",
+        "office"
+      ],
+      "pattern": "solid",
+      "material_feel": "knitwear",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "chocolate brown"
+      ],
+      "style": "minimalist",
+      "silhouette": "fitted cardigan",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "knitwear",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  },
+  {
+    "category": "shoes",
+    "name": "white leather chunky sneakers",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "white"
+      ],
+      "style": "casual",
+      "silhouette": "low-top sneakers",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "synthetic",
+      "trend_tags": [
+        "minimalist"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "white"
+      ],
+      "style": "casual",
+      "silhouette": "platform with round toe",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "synthetic",
+      "trend_tags": [
+        "minimalist"
+      ]
+    }
+  },
+  {
+    "category": "shoes",
+    "name": "tan suede ankle boots",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.5
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.5
+    },
+    "old_raw": {
+      "colors": [
+        "brown",
+        "navy blue"
+      ],
+      "style": "casual",
+      "silhouette": "wide-leg jeans",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "leather",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "brown",
+        "navy blue"
+      ],
+      "style": "classic",
+      "silhouette": "block heel, round toe",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "leather",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  },
+  {
+    "category": "bag",
+    "name": "black shoulder bag",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "black"
+      ],
+      "style": "minimalist",
+      "silhouette": "structured shoulder bag",
+      "occasion": [
+        "casual",
+        "office"
+      ],
+      "pattern": "solid",
+      "material_feel": "leather",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "black"
+      ],
+      "style": "minimalist",
+      "silhouette": "shoulder bag",
+      "occasion": [
+        "casual",
+        "office"
+      ],
+      "pattern": "solid",
+      "material_feel": "leather",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  },
+  {
+    "category": "bag",
+    "name": "brown suede hand bag",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.667
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "chocolate brown",
+        "camel",
+        "denim blue"
+      ],
+      "style": "casual",
+      "silhouette": "fitted blazer",
+      "occasion": [
+        "office",
+        "casual"
+      ],
+      "pattern": "solid",
+      "material_feel": "denim",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "camel",
+        "gold"
+      ],
+      "style": "classic",
+      "silhouette": "crescent bag",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "leather",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  },
+  {
+    "category": "skirt",
+    "name": "Black satin midi bias skirt",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "white",
+        "black"
+      ],
+      "style": "minimalist",
+      "silhouette": "straight maxi skirt",
+      "occasion": [
+        "casual",
+        "evening"
+      ],
+      "pattern": "solid",
+      "material_feel": "satin",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "black"
+      ],
+      "style": "minimalist",
+      "silhouette": "a-line skirt",
+      "occasion": [
+        "casual",
+        "evening"
+      ],
+      "pattern": "solid",
+      "material_feel": "satin",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  },
+  {
+    "category": "leggings",
+    "name": "blue high waisted seamless leggings",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 0.857,
+      "color_specificity": 2.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 0.857,
+      "color_specificity": 2.0
+    },
+    "old_raw": {
+      "colors": [
+        "navy blue"
+      ],
+      "style": "athletic",
+      "silhouette": "high-waisted leggings",
+      "occasion": [
+        "workout",
+        "casual"
+      ],
+      "pattern": "solid",
+      "material_feel": "synthetic",
+      "trend_tags": []
+    },
+    "new_raw": {
+      "colors": [
+        "navy blue"
+      ],
+      "style": "athletic",
+      "silhouette": "high-rise leggings",
+      "occasion": [
+        "workout",
+        "casual"
+      ],
+      "pattern": "solid",
+      "material_feel": "synthetic",
+      "trend_tags": []
+    }
+  },
+  {
+    "category": "jumpsuit",
+    "name": "black wide leg sleeveless jumpsuit",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "black"
+      ],
+      "style": "formal",
+      "silhouette": "wide-leg jumpsuit",
+      "occasion": [
+        "evening",
+        "formal event"
+      ],
+      "pattern": "solid",
+      "material_feel": "synthetic",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "black"
+      ],
+      "style": "formal",
+      "silhouette": "wide-leg jumpsuit",
+      "occasion": [
+        "evening",
+        "formal event"
+      ],
+      "pattern": "solid",
+      "material_feel": "synthetic",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  },
+  {
+    "category": "hat",
+    "name": "beige wide brim straw hat",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 0.667,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "black",
+        "ivory"
+      ],
+      "style": "resort",
+      "silhouette": "flowy blouse",
+      "occasion": [
+        "beach",
+        "weekend"
+      ],
+      "pattern": "floral",
+      "material_feel": "cotton",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "camel"
+      ],
+      "style": "resort",
+      "silhouette": "wide-brim hat",
+      "occasion": [
+        "beach",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "straw",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  },
+  {
+    "category": "hat",
+    "name": "black cap",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 0.857,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "black",
+        "brown"
+      ],
+      "style": "casual",
+      "silhouette": "relaxed fit",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "cotton",
+      "trend_tags": [
+        "streetwear"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "black",
+        "white"
+      ],
+      "style": "streetwear",
+      "silhouette": "baseball cap",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "logo print",
+      "material_feel": "cotton",
+      "trend_tags": []
+    }
+  },
+  {
+    "category": "skirt",
+    "name": "brown mini skirt",
+    "old": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "new": {
+      "vocab_hit_rate": 1.0,
+      "completeness": 1.0,
+      "color_specificity": 1.0
+    },
+    "old_raw": {
+      "colors": [
+        "brown",
+        "white",
+        "black"
+      ],
+      "style": "preppy",
+      "silhouette": "pleated mini skirt",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "synthetic",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    },
+    "new_raw": {
+      "colors": [
+        "brown"
+      ],
+      "style": "preppy",
+      "silhouette": "pleated mini skirt",
+      "occasion": [
+        "casual",
+        "weekend"
+      ],
+      "pattern": "solid",
+      "material_feel": "synthetic",
+      "trend_tags": [
+        "quiet luxury"
+      ]
+    }
+  }
+]

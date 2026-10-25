@@ -1,0 +1,9 @@
+# LOCUS: .dockerignore
+.git
+**/__pycache__
+**/*.pyc
+tests/
+mlops/
+frontend/
+gateway/
+attribute_tagger/

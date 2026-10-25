@@ -1,0 +1,10 @@
+mlops/venv
+mlops/__pycache__
+**/__pycache__
+**/*.pyc
+
+.git
+.github
+*.md
+!README.md
+report

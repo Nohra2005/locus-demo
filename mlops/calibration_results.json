@@ -1,0 +1,630 @@
+[
+  {
+    "query_name": "blue high waisted straight leg jeans",
+    "category": "pants",
+    "generic": false,
+    "avg_score": 0.88,
+    "pair_scores": [
+      0.88,
+      0.88,
+      0.88,
+      0.88,
+      0.88
+    ],
+    "scores_by_id": {
+      "82908c06-9d43-5c26-bac2-8a597151e100": 0.88,
+      "06d26d81-09f1-5025-93f8-1acf81f7678e": 0.88,
+      "92629cd8-527c-5afc-b7d5-33ca9f91715b": 0.88,
+      "fc31bb72-f9dc-57fe-a455-2fdea8d20b5c": 0.88,
+      "9866866a-8612-5856-af3f-4010d1c70180": 0.88
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "Beige Linen Wide leg trousers",
+    "category": "pants",
+    "generic": false,
+    "avg_score": 0.892,
+    "pair_scores": [
+      0.92,
+      0.88,
+      0.88,
+      0.9,
+      0.88
+    ],
+    "scores_by_id": {
+      "a2bd9846-cf1f-53b7-82d1-8a66752be4e8": 0.92,
+      "148949f0-ba90-5a14-b924-d61ae273c09b": 0.88,
+      "62b93c70-690b-5f41-ba31-33b37a73ff76": 0.88,
+      "12f09cea-0f51-582c-9cb6-66f002328c72": 0.9,
+      "8962f3bf-28f9-5c9a-b152-b50918a07302": 0.88
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "brown corduroy flare pants",
+    "category": "pants",
+    "generic": false,
+    "avg_score": 0.87,
+    "pair_scores": [
+      0.85,
+      0.85,
+      0.85,
+      0.9,
+      0.9
+    ],
+    "scores_by_id": {
+      "bffcc894-226d-5707-9415-a4a2f8e1d090": 0.85,
+      "166e09dd-b2a0-5a5f-815b-b7d4496738ae": 0.85,
+      "aec6ab73-a93a-5135-8115-90e283d2cb25": 0.85,
+      "d2643679-9bb9-57f0-a8fd-15b892436d57": 0.9,
+      "ccab4eef-e346-51f8-b1ae-10b8bae322dc": 0.9
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "white floral wrap midi dress",
+    "category": "dress",
+    "generic": true,
+    "avg_score": 0.854,
+    "pair_scores": [
+      0.89,
+      0.82,
+      0.85,
+      0.82,
+      0.89
+    ],
+    "scores_by_id": {
+      "19c3b944-9f02-5413-aab9-eda0e0dac46e": 0.89,
+      "0a712d93-44fd-5074-ab59-63e219fec7ce": 0.82,
+      "ee1a626b-08cf-5eb2-b062-4884510ea5f9": 0.85,
+      "8690460f-60a8-5b2e-b662-518c81243a49": 0.82,
+      "7df266f0-451d-57e4-b084-1629a4642304": 0.89
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "Camel knit mini dress",
+    "category": "dress",
+    "generic": false,
+    "avg_score": 0.87,
+    "pair_scores": [
+      0.85,
+      0.82,
+      0.9,
+      0.88,
+      0.9
+    ],
+    "scores_by_id": {
+      "147c9cd9-f278-5b0b-8462-1e10d470d287": 0.85,
+      "69e6c012-5941-57d2-87d3-69010a198ff3": 0.82,
+      "5b4feb38-927a-5428-8e43-e9a7a5017cba": 0.9,
+      "a71e4575-51bb-5003-93cc-a60fadc7c1a7": 0.88,
+      "f19d1028-793c-5e50-a481-0841e1aa2e3e": 0.9
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "white ribbed halter neck crop top",
+    "category": "top",
+    "generic": true,
+    "avg_score": 0.938,
+    "pair_scores": [
+      0.92,
+      0.95,
+      0.92,
+      0.95,
+      0.95
+    ],
+    "scores_by_id": {
+      "e889c257-f3ab-5d5f-bbee-799b650ffbb6": 0.92,
+      "bd359de0-3df6-56b3-a2f5-d3a492790a0c": 0.95,
+      "bcffa416-8922-5bb0-905b-df82960acc9b": 0.92,
+      "51c68f5c-85c7-5aab-9af6-531ecb48f244": 0.95,
+      "00a27eed-427c-5c11-9b2a-3e0e7c986ee7": 0.95
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "beige camisole top",
+    "category": "top",
+    "generic": false,
+    "avg_score": 0.904,
+    "pair_scores": [
+      0.9,
+      0.9,
+      0.88,
+      0.94,
+      0.9
+    ],
+    "scores_by_id": {
+      "65c62e95-cad7-55c3-9a75-038d004e434b": 0.9,
+      "d8a0e4c6-bc26-5277-b366-fb0b735b984f": 0.9,
+      "8f03daf7-8f8f-5f70-9ff4-0fe5aed8586a": 0.88,
+      "79cb2081-2311-5fc1-a7bc-f48807e493f8": 0.94,
+      "02ff1f08-4cf1-55f3-98df-b5d5101dfb0a": 0.9
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "camel longline wool coat",
+    "category": "jacket",
+    "generic": false,
+    "avg_score": 0.67,
+    "pair_scores": [
+      0.65,
+      0.65,
+      0.65,
+      0.65,
+      0.75
+    ],
+    "scores_by_id": {
+      "4da2946a-5942-5366-a83c-9c577753c7a5": 0.65,
+      "8306b564-1e1d-56a9-a0bc-a0f737067b3e": 0.65,
+      "a85003b9-a0a8-5501-a366-ac40b0cc99e6": 0.65,
+      "ddfc1bec-2343-504e-a67a-549c47c028b5": 0.65,
+      "bf654462-54cb-5c6d-b4bc-29a8c4639b2f": 0.75
+    },
+    "label": "WARN"
+  },
+  {
+    "query_name": "brown leather biker jacket",
+    "category": "jacket",
+    "generic": false,
+    "avg_score": 0.858,
+    "pair_scores": [
+      0.88,
+      0.88,
+      0.98,
+      0.65,
+      0.9
+    ],
+    "scores_by_id": {
+      "2a1b641d-1e79-5709-a4fa-a1603196ddd9": 0.88,
+      "52eebc76-a466-5230-ac54-8ac52070ed99": 0.88,
+      "9483c94a-4bc9-5931-928f-b097ef7a8656": 0.98,
+      "e2b1c521-752d-56b9-9907-f4641c94ddda": 0.65,
+      "9538cab5-f6fb-5426-8f64-82cefb830300": 0.9
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "cream chunky knit oversized sweater",
+    "category": "sweater",
+    "generic": false,
+    "avg_score": 0.858,
+    "pair_scores": [
+      0.92,
+      0.82,
+      0.88,
+      0.82,
+      0.85
+    ],
+    "scores_by_id": {
+      "6f70e536-aa97-53e7-810d-a8ed3c4d8731": 0.92,
+      "cbf3f03c-846d-5dc0-ada0-24017941a78e": 0.82,
+      "a75477bc-92c0-52f1-ae5f-dfa362bf5f15": 0.88,
+      "b0398833-63f4-540e-86fb-677fa70dcdd3": 0.82,
+      "b6b01fa3-2d67-579d-82d1-0d1990091a64": 0.85
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "brown open front cardigan",
+    "category": "sweater",
+    "generic": false,
+    "avg_score": 0.862,
+    "pair_scores": [
+      0.88,
+      0.78,
+      0.85,
+      0.92,
+      0.88
+    ],
+    "scores_by_id": {
+      "be4b8f3c-3f5c-5e37-ad1f-76bd2782e41a": 0.88,
+      "732104c6-527d-5ddc-8d25-d7b322a5049f": 0.78,
+      "1cd5c10d-793f-5178-97c6-522406ab69e9": 0.85,
+      "18f5d801-c402-589e-9c4e-e26351456f2d": 0.92,
+      "c1ad4b6d-a455-5ecd-bb3e-54b79e568c6a": 0.88
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "white leather chunky sneakers",
+    "category": "shoes",
+    "generic": true,
+    "avg_score": 0.84,
+    "pair_scores": [
+      0.9,
+      0.85,
+      0.9,
+      0.65,
+      0.9
+    ],
+    "scores_by_id": {
+      "23013163-f802-51a5-b70f-a438a00bb5d8": 0.9,
+      "dcfdeecb-f6cd-531c-9ec8-3578f48dd70f": 0.85,
+      "dcc0d51d-ad78-5835-9dfb-24f3038be725": 0.9,
+      "553db8f5-3a56-56f5-acb7-f633529aef19": 0.65,
+      "438a4eac-efba-5fe9-97c1-e3d9c7b194e0": 0.9
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "tan suede ankle boots",
+    "category": "shoes",
+    "generic": false,
+    "avg_score": 0.776,
+    "pair_scores": [
+      0.75,
+      0.65,
+      0.88,
+      0.95,
+      0.65
+    ],
+    "scores_by_id": {
+      "4e38ec41-863c-5db0-815f-b12ca8bd77cd": 0.75,
+      "8d67691f-7276-5ec1-8b7c-8d2eb3051035": 0.65,
+      "fa20819b-96be-57bb-989a-414fd97e6e4f": 0.88,
+      "8fa344c7-2b21-5337-9ba9-4630d65fbeaf": 0.95,
+      "4a0f7951-a18d-5fa1-8dd0-5ceb5c206f8f": 0.65
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "black pointed toe kitten heels",
+    "category": "shoes",
+    "generic": true,
+    "avg_score": 0.876,
+    "pair_scores": [
+      0.9,
+      0.88,
+      0.9,
+      0.85,
+      0.85
+    ],
+    "scores_by_id": {
+      "a88dbe88-619c-56f5-b1d2-4c2cb70cb795": 0.9,
+      "41dfcbe7-0995-5dbc-a0b4-b7d4d658cbe3": 0.88,
+      "f7c3dfb3-4ea6-5d47-9d4c-195c1a98b468": 0.9,
+      "4b4ad862-3bc2-5869-b433-054e1b33d96d": 0.85,
+      "0166ad0b-5a82-5caa-b683-fa61524567d1": 0.85
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "grey zip up sweater",
+    "category": "sweater",
+    "generic": false,
+    "avg_score": 0.896,
+    "pair_scores": [
+      0.88,
+      0.9,
+      0.92,
+      0.88,
+      0.9
+    ],
+    "scores_by_id": {
+      "620450a6-b18c-56fa-986f-17c97dccab01": 0.88,
+      "ddfb7d91-31ee-5ebc-91a3-7542abd2e0c0": 0.9,
+      "53f7fa18-e622-58bf-b9be-5aac18bf708c": 0.92,
+      "33017a69-a180-5a5b-87e3-b7205f51c991": 0.88,
+      "7907697d-1b8d-5384-9475-b9c6aa91d561": 0.9
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "black off shoulder ruched top",
+    "category": "top",
+    "generic": true,
+    "avg_score": 0.904,
+    "pair_scores": [
+      0.92,
+      0.92,
+      0.9,
+      0.88,
+      0.9
+    ],
+    "scores_by_id": {
+      "63ecd20b-fa68-5e56-b00f-469251ed436d": 0.92,
+      "139eac9f-0acd-5cb6-b1d1-4f68547d9f68": 0.92,
+      "e93f24ca-21ee-513e-a801-f512c43c2b58": 0.9,
+      "61f4cfd2-feb1-5ace-928b-ccaa01ffb4c9": 0.88,
+      "4663b1ce-46aa-5ac8-bb74-86d93ccca787": 0.9
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "red linen maxi dress",
+    "category": "dress",
+    "generic": false,
+    "avg_score": 0.822,
+    "pair_scores": [
+      0.65,
+      0.88,
+      0.8,
+      0.88,
+      0.9
+    ],
+    "scores_by_id": {
+      "2f6173a3-0f00-5583-bdbc-4189d184934b": 0.65,
+      "99356a89-134d-5757-9475-8ad3be6d054b": 0.88,
+      "39d19548-48b1-54ea-a375-d451ba5ea1e3": 0.8,
+      "09957435-09b6-5c77-8400-57ba408affe5": 0.88,
+      "898d91f2-3b92-5572-b5ed-4c339e9dceb0": 0.9
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "black oversized blazer",
+    "category": "jacket",
+    "generic": true,
+    "avg_score": 0.9,
+    "pair_scores": [
+      0.9,
+      0.9,
+      0.9,
+      0.9,
+      0.9
+    ],
+    "scores_by_id": {
+      "58113d9f-d072-5c91-9e31-339f9d23e7ca": 0.9,
+      "92c71076-cc89-5845-8a34-305ac3b18751": 0.9,
+      "f8fc48cc-08cb-5c92-a21f-16e19d6b5649": 0.9,
+      "4d24539f-70aa-5675-8b2a-005b14477d30": 0.9,
+      "03188fe6-260c-5db3-8cd4-65b30f10c2f0": 0.9
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "black satin slip midi dress",
+    "category": "dress",
+    "generic": true,
+    "avg_score": 0.892,
+    "pair_scores": [
+      0.9,
+      0.9,
+      0.88,
+      0.88,
+      0.9
+    ],
+    "scores_by_id": {
+      "739dc41c-c103-57c5-bf21-9bab6509e90a": 0.9,
+      "0049e382-4762-5d69-a834-5a63d16e647d": 0.9,
+      "bce9379c-e2f5-5f13-9372-64d705a3ccd6": 0.88,
+      "66a097cf-3bad-52e8-bdc8-749171c0ce8d": 0.88,
+      "e1b48181-1761-5b68-85f3-564e349b3a47": 0.9
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "black bottine",
+    "category": "shoes",
+    "generic": true,
+    "avg_score": 0.88,
+    "pair_scores": [
+      0.85,
+      0.9,
+      0.85,
+      0.9,
+      0.9
+    ],
+    "scores_by_id": {
+      "b38a3043-1e3d-5f8a-9ab3-6c2e4c9314c0": 0.85,
+      "b7dea2d0-22b7-58e2-8609-98bece39bd9b": 0.9,
+      "d32f4e32-f1fa-580f-ae19-87db0027f5ac": 0.85,
+      "824fa3ec-8dc9-5bde-95a6-9bc5d2c9f5da": 0.9,
+      "1ca3cad2-622a-5333-bd6b-d036286deec6": 0.9
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "black shoulder bag",
+    "category": "bag",
+    "generic": true,
+    "avg_score": 0.88,
+    "pair_scores": [
+      0.9,
+      0.9,
+      0.85,
+      0.9,
+      0.85
+    ],
+    "scores_by_id": {
+      "6d82e4da-7f58-5259-a1c9-2cfcdee30ab1": 0.9,
+      "5edd9e54-76f5-5286-8291-6ea4615f0398": 0.9,
+      "317ca124-1663-56ef-b51f-83eabb858f52": 0.85,
+      "aea7cba4-c7ae-54e3-b13d-dd10078e985c": 0.9,
+      "b87ea58c-328b-55cf-87c9-a3dd46d49b67": 0.85
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "brown suede hand bag",
+    "category": "bag",
+    "generic": false,
+    "avg_score": 0.882,
+    "pair_scores": [
+      0.88,
+      0.85,
+      0.88,
+      0.9,
+      0.9
+    ],
+    "scores_by_id": {
+      "1f651d00-cc83-590d-868b-182ba314030a": 0.88,
+      "539fe3ad-0862-5781-a49b-df170f9cf09e": 0.85,
+      "1b6d4563-a75c-5463-b2d3-22f14358d0c6": 0.88,
+      "c45d4716-c9b3-5676-bd4a-b060be077bdc": 0.9,
+      "125ad52f-2764-5d3d-9508-55c975739b1b": 0.9
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "Black satin midi bias skirt",
+    "category": "skirt",
+    "generic": true,
+    "avg_score": 0.854,
+    "pair_scores": [
+      0.9,
+      0.9,
+      0.92,
+      0.9,
+      0.65
+    ],
+    "scores_by_id": {
+      "d8153942-5a48-5c3d-b50d-76a0e2197bf4": 0.9,
+      "9053d767-7162-528e-81b6-35f1ac03b8c7": 0.9,
+      "55c90624-b00c-5087-9a80-8730dba75cc0": 0.92,
+      "b21d2279-1619-53d2-9e97-23c115affb23": 0.9,
+      "054d366d-03ea-51eb-837a-970dcdc6b4d8": 0.65
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "blue high waisted seamless leggings",
+    "category": "leggings",
+    "generic": false,
+    "avg_score": 0.946,
+    "pair_scores": [
+      0.98,
+      0.98,
+      0.9,
+      0.92,
+      0.95
+    ],
+    "scores_by_id": {
+      "d8642748-f85a-5a3c-9841-86c9404cc9a5": 0.98,
+      "04a16edf-2896-5f00-ac5f-70d89395d8dd": 0.98,
+      "4e94e7b4-1c76-53b7-a0c9-f9d4cd36c445": 0.9,
+      "909966ec-7d20-52e4-95ec-9d2d2c083a99": 0.92,
+      "5669bd6c-2ea5-557b-b59d-8880f18e1a7c": 0.95
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "black wide leg sleeveless jumpsuit",
+    "category": "jumpsuit",
+    "generic": true,
+    "avg_score": 0.76,
+    "pair_scores": [
+      0.88,
+      0.8,
+      0.65,
+      0.82,
+      0.65
+    ],
+    "scores_by_id": {
+      "c0d046a6-0008-5347-95d7-5392b8032746": 0.88,
+      "b58aa3b8-65d2-5841-82e4-702b7686550c": 0.8,
+      "ee1f7a15-fa28-512d-b4a4-d14c54fce13c": 0.65,
+      "5cc41f8d-19f0-57c7-b2c6-8906eb3b8683": 0.82,
+      "f06e6087-7ca3-5dc6-8624-ef1f1a829bd2": 0.65
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "beige wide brim straw hat",
+    "category": "hat",
+    "generic": false,
+    "avg_score": 0.84,
+    "pair_scores": [
+      0.65,
+      0.9,
+      0.9,
+      0.9,
+      0.85
+    ],
+    "scores_by_id": {
+      "f70ee9a4-4238-5f09-82b4-899b3ad76467": 0.65,
+      "4c07aac5-f332-5161-9ef8-03fb56bdc8ec": 0.9,
+      "cf8e22d2-3bfa-5efb-85f1-f93fd255c4ff": 0.9,
+      "df063253-f1c3-5714-95be-3f3cde4f8029": 0.9,
+      "551c12ae-da83-50f0-aed8-4a84383a342c": 0.85
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "black cap",
+    "category": "hat",
+    "generic": true,
+    "avg_score": 0.873,
+    "pair_scores": [
+      0.88,
+      0.88,
+      0.85,
+      0.88
+    ],
+    "scores_by_id": {
+      "4327840b-94d7-5d68-ae2c-e48292064a21": 0.88,
+      "e97d4fbc-496c-5ed2-862d-768c7d26acbe": 0.88,
+      "2818e90d-e5f5-5880-860a-13ac59dd8767": 0.85,
+      "83266ad5-4d9f-5c43-be32-626fc4e22369": 0.88
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "tan leather tote bag",
+    "category": "bag",
+    "generic": false,
+    "avg_score": 0.8,
+    "pair_scores": [
+      0.75,
+      0.85,
+      0.85,
+      0.65,
+      0.9
+    ],
+    "scores_by_id": {
+      "e17c9cf5-afad-5b27-a2f7-549ba3d41f65": 0.75,
+      "5a5fd643-4bc1-5882-8e43-efb502401faa": 0.85,
+      "5d4e9f5c-8112-5ff1-946f-98fde36b56bd": 0.85,
+      "a47dd5d1-dabb-59b9-98a7-7baab58680d5": 0.65,
+      "415ecb73-64e7-56df-aa62-7543823d08e8": 0.9
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "white oversized shirt",
+    "category": "top",
+    "generic": true,
+    "avg_score": 0.914,
+    "pair_scores": [
+      0.9,
+      0.92,
+      0.9,
+      0.9,
+      0.95
+    ],
+    "scores_by_id": {
+      "5e357352-f1ed-572d-ba1d-10613d37db3a": 0.9,
+      "f61aace9-ec2b-5962-9fa8-211748be7204": 0.92,
+      "fc347a79-3652-57d5-88f2-2d1e8d6e9b54": 0.9,
+      "02cc3c50-470c-5c2a-901b-2700481c974e": 0.9,
+      "7fb61277-0a91-58ac-8ef3-3b6158b43897": 0.95
+    },
+    "label": "PASS"
+  },
+  {
+    "query_name": "brown mini skirt",
+    "category": "skirt",
+    "generic": false,
+    "avg_score": 0.776,
+    "pair_scores": [
+      0.9,
+      0.55,
+      0.9,
+      0.65,
+      0.88
+    ],
+    "scores_by_id": {
+      "171b5a29-dfcb-5382-a51c-463a6a242f31": 0.9,
+      "bf449ca2-660a-5b83-9882-2405aa54af94": 0.55,
+      "f24301c4-6571-5ec8-9d5d-bf43cf6568bf": 0.9,
+      "42052aec-6db9-5aa6-bd27-63bb3af0690c": 0.65,
+      "1e30ba78-fff7-5e60-a621-b75306311f38": 0.88
+    },
+    "label": "PASS"
+  }
+]

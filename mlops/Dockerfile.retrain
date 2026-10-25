@@ -1,0 +1,23 @@
+FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /mlops
+
+# System deps — cached apt lists, no layer bloat
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && apt-get install -y --no-install-recommends libgl1 libglib2.0-0
+
+# Upgrade pip first — python:3.9-slim ships a stale pip that fails on torch 2.6.0 metadata
+RUN pip install --upgrade pip
+
+# torch + torchvision (~700 MB) — pip wheel cache persists across rebuilds
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --timeout 300 --retries 5 --index-url https://download.pytorch.org/whl/cpu torch==2.6.0+cpu torchvision==0.21.0+cpu
+
+# Remaining ML deps
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --timeout 300 --retries 5 "transformers>=4.48.0" "peft>=0.10.0" "qdrant-client>=1.10.0" "mlflow>=2.13.0" Pillow requests
+
+COPY mlops/ /mlops/

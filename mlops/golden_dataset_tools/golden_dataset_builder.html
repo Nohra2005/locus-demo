@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Locus — Golden Dataset Builder</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0f0f13; color: #e8e8f0;
+    min-height: 100vh; padding: 24px;
+  }
+  .app { max-width: 1200px; margin: 0 auto; }
+
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid #2a2a3a;
+  }
+  .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+  .logo span { color: #7c6af7; }
+  .progress-wrap { text-align: right; }
+  .progress-label { font-size: 13px; color: #888; margin-bottom: 6px; }
+  .progress-bar-outer { width: 200px; height: 8px; background: #2a2a3a; border-radius: 4px; overflow: hidden; }
+  .progress-bar-inner { height: 100%; background: linear-gradient(90deg, #7c6af7, #a78bfa); border-radius: 4px; transition: width 0.4s; }
+  .progress-count { font-size: 18px; font-weight: 700; color: #a78bfa; margin-top: 4px; }
+
+  .config-bar {
+    display: flex; gap: 12px; align-items: center;
+    background: #17172a; border: 1px solid #2a2a3a; border-radius: 10px;
+    padding: 12px 16px; margin-bottom: 16px; flex-wrap: wrap; font-size: 13px;
+  }
+  .config-bar label { color: #888; white-space: nowrap; }
+
+  .legend {
+    background: #17172a; border: 1px solid #2a2a3a; border-radius: 10px;
+    padding: 12px 18px; margin-bottom: 20px;
+    display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px;
+  }
+  .legend-title { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; font-weight: 600; }
+  .legend-col { min-width: 160px; }
+  .legend-item { line-height: 1.9; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .panel { background: #17172a; border: 1px solid #2a2a3a; border-radius: 14px; padding: 20px; }
+  .panel-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #7c6af7; margin-bottom: 16px; }
+
+  .img-card { background: #0f0f1a; border: 1.5px solid #2a2a3a; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+  .img-preview-wrap { width: 100%; height: 160px; border-radius: 7px; overflow: hidden; background: #1a1a2a; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+  .img-preview-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .img-placeholder { color: #444; font-size: 13px; text-align: center; line-height: 1.6; }
+  .img-card.query .img-preview-wrap { height: 220px; }
+
+  .rel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .rel-grid .img-card { margin-bottom: 0; }
+  .rel-grid .img-preview-wrap { height: 120px; }
+  .rel-grid .img-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+  .url-wrap { position: relative; margin-bottom: 5px; }
+  .url-wrap input { width: 100%; padding-right: 28px !important; }
+  .url-status { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 13px; pointer-events: none; }
+
+  .domain-warning { display: none; font-size: 11px; padding: 4px 8px; border-radius: 5px; margin-bottom: 5px; line-height: 1.4; }
+  .domain-warning.bad   { display: block; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); color: #f87171; }
+  .domain-warning.risky { display: block; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2); color: #fbbf24; }
+  .domain-warning.good  { display: block; background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.15); color: #4ade80; }
+
+  input[type="text"], select {
+    width: 100%; background: #1e1e30; border: 1px solid #2e2e45; border-radius: 7px;
+    padding: 8px 12px; font-size: 13px; color: #e8e8f0; outline: none; transition: border-color 0.2s;
+  }
+  input[type="text"]:focus, select:focus { border-color: #7c6af7; }
+  input[type="text"]::placeholder { color: #555; }
+  select option { background: #1e1e30; }
+
+  .input-label { font-size: 11px; color: #666; margin-bottom: 5px; font-weight: 500; }
+  .rank-badge { width: 20px; height: 20px; min-width: 20px; background: #2a2a3a; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; color: #888; flex-shrink: 0; }
+  .field-row { display: flex; gap: 6px; align-items: center; margin-bottom: 5px; }
+  .field-row .url-wrap { flex: 1; margin-bottom: 0; }
+
+  .meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+
+  .btn { display: inline-flex; align-items: center; gap: 7px; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: all 0.15s; }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .btn-primary { background: linear-gradient(135deg, #7c6af7, #a78bfa); color: #fff; }
+  .btn-primary:not(:disabled):hover { filter: brightness(1.1); transform: translateY(-1px); }
+  .btn-ghost { background: #2a2a3a; color: #ccc; }
+  .btn-ghost:hover { background: #33334a; }
+  .btn-sm { padding: 5px 10px; font-size: 12px; border-radius: 6px; }
+
+  .actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 32px; }
+
+  .log-panel { background: #17172a; border: 1px solid #2a2a3a; border-radius: 14px; padding: 20px; }
+  .log-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .log-title { font-size: 13px; font-weight: 600; color: #7c6af7; text-transform: uppercase; letter-spacing: 0.08em; }
+  .entry-scroll { max-height: 700px; overflow-y: auto; }
+  .entry-scroll::-webkit-scrollbar { width: 4px; }
+  .entry-scroll::-webkit-scrollbar-thumb { background: #3a3a55; border-radius: 2px; }
+  .empty-state { color: #444; font-size: 13px; text-align: center; padding: 24px 0; }
+
+  .entry-card { background: #0f0f1a; border: 1px solid #2a2a3a; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+  .entry-header { display: flex; align-items: center; gap: 12px; padding: 10px 14px; cursor: pointer; user-select: none; transition: background 0.15s; }
+  .entry-header:hover { background: #141424; }
+  .entry-thumb { width: 36px; height: 36px; border-radius: 5px; object-fit: cover; background: #2a2a3a; flex-shrink: 0; }
+  .entry-info { flex: 1; min-width: 0; }
+  .entry-name { font-weight: 600; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .entry-meta { color: #666; font-size: 11px; margin-top: 2px; }
+  .entry-chevron { color: #555; font-size: 11px; transition: transform 0.2s; flex-shrink: 0; }
+  .entry-card.open .entry-chevron { transform: rotate(90deg); }
+  .entry-del-btn { background: none; border: none; cursor: pointer; color: #555; font-size: 14px; padding: 4px 6px; border-radius: 4px; transition: color 0.15s; flex-shrink: 0; }
+  .entry-del-btn:hover { color: #f87171; }
+
+  .rel-good { color: #4ade80; font-weight: 700; }
+  .rel-warn { color: #fbbf24; font-weight: 700; }
+  .rel-bad  { color: #f87171; font-weight: 700; }
+
+  .entry-body { display: none; padding: 0 14px 14px; border-top: 1px solid #1a1a2a; }
+  .entry-card.open .entry-body { display: block; }
+
+  .rel-list { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+
+  .slot-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: #17172a; border: 1px solid #2a2a3a; border-radius: 8px; padding: 8px 10px;
+  }
+  .slot-item.failed { border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.04); }
+  .slot-item.empty  { border-color: #2a2a3a; border-style: dashed; }
+
+  .slot-thumb { width: 52px; height: 52px; border-radius: 6px; object-fit: cover; background: #2a2a3a; flex-shrink: 0; }
+  .slot-info { flex: 1; min-width: 0; }
+  .slot-name { font-size: 12px; font-weight: 500; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .slot-url  { font-size: 10px; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
+  .slot-status { font-size: 11px; margin-bottom: 4px; }
+  .s-ok   { color: #4ade80; }
+  .s-fail { color: #f87171; }
+  .s-empty { color: #666; }
+
+  .slot-edit { margin-top: 8px; padding-top: 8px; border-top: 1px solid #2a2a3a; }
+  .slot-edit .url-wrap { margin-bottom: 5px; }
+  .slot-edit-row { display: flex; gap: 6px; margin-top: 5px; }
+
+  #toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    background: #2a2a3a; border: 1px solid #3a3a55;
+    padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 500;
+    opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999;
+    max-width: 520px; text-align: center;
+  }
+  #toast.show    { opacity: 1; }
+  #toast.success { border-color: #4ade80; color: #4ade80; }
+  #toast.error   { border-color: #f87171; color: #f87171; }
+  #toast.warn    { border-color: #facc15; color: #facc15; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header>
+    <div class="logo">Locus <span>Golden Dataset Builder</span></div>
+    <div class="progress-wrap">
+      <div class="progress-label">Progress</div>
+      <div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBar" style="width:0%"></div></div>
+      <div class="progress-count"><span id="progressCount">0</span> / 30</div>
+    </div>
+  </header>
+
+  <div class="config-bar">
+    <label>Gateway URL</label>
+    <input type="text" id="gatewayUrl" value="http://localhost:8000" style="width:240px;" />
+    <label style="margin-left:12px;">Target</label>
+    <input type="text" id="targetCount" value="30" style="width:55px;" />
+    <div style="margin-left:auto; display:flex; gap:8px;">
+      <button class="btn btn-ghost btn-sm" onclick="exportJSON()">⬇ Export JSON</button>
+      <button class="btn btn-ghost btn-sm" onclick="clearAll()" style="color:#f87171;">🗑 Clear All</button>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-col">
+      <div class="legend-title">URL indicators</div>
+      <div class="legend-item">✅ <span style="color:#4ade80">Green</span> — known CDN, will work</div>
+      <div class="legend-item">⚠️ <span style="color:#fbbf24">Yellow</span> — unknown, may or may not work</div>
+      <div class="legend-item">❌ <span style="color:#f87171">Red</span> — always blocked, replace it</div>
+    </div>
+    <div class="legend-col">
+      <div class="legend-title">✅ Always works</div>
+      <div class="legend-item" style="color:#4ade80">ASOS, H&amp;M, Zara, Zalando, Mango</div>
+      <div class="legend-item" style="color:#4ade80">Shopify, Wix, Squarespace stores</div>
+    </div>
+    <div class="legend-col">
+      <div class="legend-title">❌ Never works</div>
+      <div class="legend-item" style="color:#f87171">Pinterest, Instagram, Facebook</div>
+      <div class="legend-item" style="color:#f87171">Twitter/X, TikTok, Reddit</div>
+    </div>
+    <div class="legend-col">
+      <div class="legend-title">⚠️ Query image tip</div>
+      <div class="legend-item" style="color:#fbbf24">Right-click image → Copy image address</div>
+      <div class="legend-item" style="color:#fbbf24">Must start with https://, not data:</div>
+    </div>
+  </div>
+
+  <div class="meta-row">
+    <div>
+      <div class="input-label">Query item name</div>
+      <input type="text" id="queryName" placeholder="e.g. black leather biker jacket" />
+    </div>
+    <div>
+      <div class="input-label">Category</div>
+      <select id="queryCategory">
+        <option value="">— select category —</option>
+        <option>top</option><option>sports_bra</option><option>pants</option>
+        <option>leggings</option><option>shorts</option><option>skirt</option>
+        <option>dress</option><option>sweater</option><option>jacket</option>
+        <option>shoes</option><option>hat</option><option>bag</option><option>jumpsuit</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <div class="panel-title">🔍 Query Image</div>
+      <div class="img-card query">
+        <div class="img-preview-wrap" id="queryPreviewWrap">
+          <div class="img-placeholder">Paste URL below<br/>to preview</div>
+        </div>
+        <div class="input-label">Image URL</div>
+        <div class="url-wrap">
+          <input type="text" id="queryUrl" placeholder="https://…"
+                 oninput="onQueryUrlInput()" />
+          <span class="url-status" id="queryStatus"></span>
+        </div>
+        <div class="domain-warning" id="queryWarn"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">✅ 5 Google Lens Matches</div>
+      <div class="rel-grid" id="relGrid"></div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="submitBtn" onclick="submitSet()">⚡ Index &amp; Save</button>
+    <button class="btn btn-ghost" onclick="resetForm()">↺ Clear form</button>
+    <span id="submitStatus" style="font-size:13px; color:#888;"></span>
+  </div>
+
+  <div class="log-panel">
+    <div class="log-header">
+      <div class="log-title">📋 Saved Entries — click any entry to expand and fix individual links</div>
+      <span id="entryCount" style="font-size:13px; color:#666;">0 entries</span>
+    </div>
+    <div class="entry-scroll">
+      <div id="entryList"><div class="empty-state">No entries yet.</div></div>
+    </div>
+  </div>
+
+</div>
+<div id="toast"></div>
+
+<script>
+// ─── Domain lists ──────────────────────────────────────────────────────────────
+const BAD  = ['pinterest.com','pinimg.com','pinterest.co.uk','instagram.com','cdninstagram.com','fbcdn.net','facebook.com','twitter.com','x.com','twimg.com','pbs.twimg.com','tiktok.com','tiktokcdn.com','reddit.com','redd.it','redditmedia.com','youtube.com','youtu.be','ytimg.com','snapchat.com','tumblr.com'];
+const GOOD = ['asos-media.com','images.asos-media.com','image.hm.com','lp2.hm.com','static.zara.net','zara.com','img01.ztat.net','img02.ztat.net','mosaic01.ztat.net','st.mngbcn.com','mango.com','cdn.shopify.com','myshopify.com','wixstatic.com','static.wixstatic.com','squarespace-cdn.com','images.squarespace-cdn.com','n.nordstrommedia.com','net-a-porter.com','mrporter.com','img.ssense.com','cdn-images.farfetch-contents.com','is4.revolveassets.com','images.urbndata.com','image.uniqlo.com','static.e-stradivarius.net','static.pullandbear.net','static.bershka.net','i.imgur.com','images.unsplash.com','images.pexels.com'];
+
+function classifyDomain(url) {
+  if (!url) return 'unknown';
+  if (url.startsWith('data:')) return 'data';
+  if (!url.startsWith('http')) return 'unknown';
+  try {
+    const h = new URL(url).hostname.toLowerCase();
+    for (const d of BAD)  if (h===d||h.endsWith('.'+d)) return 'bad';
+    for (const d of GOOD) if (h===d||h.endsWith('.'+d)) return 'good';
+    return 'risky';
+  } catch { return 'unknown'; }
+}
+
+// ─── Query URL handler (separate — detects data: URIs) ────────────────────────
+function onQueryUrlInput() {
+  const url  = document.getElementById('queryUrl').value.trim();
+  const wrap = document.getElementById('queryPreviewWrap');
+  const warn = document.getElementById('queryWarn');
+  const stat = document.getElementById('queryStatus');
+
+  if (!url) {
+    wrap.innerHTML = '<div class="img-placeholder">Paste URL below<br/>to preview</div>';
+    warn.className = 'domain-warning'; warn.textContent = ''; stat.textContent = ''; return;
+  }
+
+  // Show preview regardless (data: URLs render fine in <img>)
+  wrap.innerHTML = `<img src="${url}" onerror="this.parentNode.innerHTML='<div class=img-placeholder style=color:#f87171>⚠ Cannot load</div>'" />`;
+
+  // data: URI — block with clear instructions
+  if (url.startsWith('data:')) {
+    warn.className   = 'domain-warning bad';
+    warn.textContent = '❌ This is a base64 image, not a URL. The evaluation script needs a real https:// link. Right-click the image on Google → "Copy image address" to get the real URL.';
+    stat.textContent = '❌';
+    return;
+  }
+
+  const cls  = classifyDomain(url);
+  let host = ''; try { host = new URL(url).hostname; } catch {}
+  const msgs = {
+    bad:   `❌ ${host} blocks server downloads. Use ASOS/Zara/H&M instead.`,
+    good:  `✅ ${host} — known CDN, will work reliably.`,
+    risky: `⚠️ ${host} — unknown domain. Should be fine for query images (only used for evaluation, not indexed).`,
+  };
+  warn.className   = `domain-warning ${cls==='risky'?'risky':cls==='good'?'good':cls==='bad'?'bad':''}`;
+  warn.textContent = msgs[cls] || '';
+  stat.textContent = cls==='bad'?'❌':cls==='good'?'✅':cls==='risky'?'⚠️':'';
+}
+
+// ─── Relevant slot URL handler ─────────────────────────────────────────────────
+function onRelUrlInput(i) {
+  const url  = document.getElementById(`relUrl${i}`).value.trim();
+  const wrap = document.getElementById(`relPrev${i}`);
+  const warn = document.getElementById(`relWarn${i}`);
+  const stat = document.getElementById(`relStat${i}`);
+
+  if (!url) {
+    wrap.innerHTML = '<div class="img-placeholder">Paste URL<br/>below</div>';
+    warn.className = 'domain-warning'; warn.textContent = ''; stat.textContent = ''; return;
+  }
+  wrap.innerHTML = `<img src="${url}" onerror="this.parentNode.innerHTML='<div class=img-placeholder style=color:#f87171>⚠ Cannot load</div>'" />`;
+
+  if (url.startsWith('data:')) {
+    warn.className   = 'domain-warning bad';
+    warn.textContent = '❌ Base64 image — use a real https:// URL. Right-click → Copy image address.';
+    stat.textContent = '❌'; return;
+  }
+
+  const cls  = classifyDomain(url);
+  let host = ''; try { host = new URL(url).hostname; } catch {}
+  const msgs = {
+    bad:   `❌ ${host} blocks server downloads. Use ASOS/Zara/H&M instead.`,
+    good:  `✅ ${host} — known CDN, will index reliably.`,
+    risky: `⚠️ ${host} — unknown domain. May work or may be blocked.`,
+  };
+  warn.className   = `domain-warning ${cls==='risky'?'risky':cls==='good'?'good':cls==='bad'?'bad':''}`;
+  warn.textContent = msgs[cls] || '';
+  stat.textContent = cls==='bad'?'❌':cls==='good'?'✅':cls==='risky'?'⚠️':'';
+}
+
+// ─── Build rel grid ────────────────────────────────────────────────────────────
+function buildRelGrid() {
+  const g = document.getElementById('relGrid');
+  g.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    g.innerHTML += `
+      <div class="img-card">
+        <div class="img-preview-wrap" id="relPrev${i}"><div class="img-placeholder">Paste URL<br/>below</div></div>
+        <div class="field-row">
+          <div class="rank-badge">${i+1}</div>
+          <div class="url-wrap" style="flex:1">
+            <input type="text" id="relUrl${i}" placeholder="Image URL" oninput="onRelUrlInput(${i})" />
+            <span class="url-status" id="relStat${i}"></span>
+          </div>
+        </div>
+        <div class="domain-warning" id="relWarn${i}"></div>
+        <input type="text" id="relName${i}" placeholder="e.g. slim denim jacket" style="font-size:12px" />
+      </div>`;
+  }
+}
+
+// ─── UUID v5 ───────────────────────────────────────────────────────────────────
+async function uuid5(imgUrl) {
+  const name = 'golden::'+imgUrl;
+  const ns   = hexToU8('6ba7b8119dad11d180b400c04fd430c8');
+  const nb   = new TextEncoder().encode(name);
+  const buf  = new Uint8Array(ns.length+nb.length);
+  buf.set(ns); buf.set(nb,ns.length);
+  const hash = new Uint8Array(await crypto.subtle.digest('SHA-1',buf));
+  hash[6]=(hash[6]&0x0f)|0x50; hash[8]=(hash[8]&0x3f)|0x80;
+  const h = Array.from(hash.slice(0,16)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  return [h.slice(0,8),h.slice(8,12),h.slice(12,16),h.slice(16,20),h.slice(20)].join('-');
+}
+function hexToU8(hex) { return new Uint8Array(hex.match(/.{2}/g).map(b=>parseInt(b,16))); }
+
+// ─── State ─────────────────────────────────────────────────────────────────────
+const KEY = 'locus_golden_v2';
+let dataset = JSON.parse(localStorage.getItem(KEY)||'[]');
+function persist() { localStorage.setItem(KEY, JSON.stringify(dataset)); }
+function gw() { return document.getElementById('gatewayUrl').value.trim()||'http://localhost:8000'; }
+async function callIndex(items) {
+  const r = await fetch(`${gw()}/add-bulk-batch`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items})});
+  if (!r.ok) throw new Error(`Gateway ${r.status}`);
+  return r.json();
+}
+
+// ─── Submit ────────────────────────────────────────────────────────────────────
+async function submitSet() {
+  const queryUrl  = document.getElementById('queryUrl').value.trim();
+  const queryName = document.getElementById('queryName').value.trim() || `query_${dataset.length+1}`;
+  const queryCat  = document.getElementById('queryCategory').value;
+
+  if (!queryUrl)               { toast('Paste a query image URL first.','warn'); return; }
+  if (queryUrl.startsWith('data:')) { toast('Query URL is a base64 image — right-click the image on Google → "Copy image address" to get a real https:// URL.','error'); document.getElementById('queryUrl').focus(); return; }
+  if (!queryCat)               { toast('Select a category before indexing.','warn'); document.getElementById('queryCategory').focus(); return; }
+
+  // Block bad/data: in rel slots
+  const badSlots = [];
+  for (let i=0;i<5;i++) {
+    const u = document.getElementById(`relUrl${i}`).value.trim();
+    if (u && (classifyDomain(u)==='bad' || u.startsWith('data:'))) badSlots.push(i+1);
+  }
+  if (badSlots.length) { toast(`Slots ${badSlots.join(',')} have blocked or base64 URLs. Replace them first.`,'error'); return; }
+
+  const rawSlots = [];
+  for (let i=0;i<5;i++) {
+    const url  = document.getElementById(`relUrl${i}`).value.trim();
+    const name = document.getElementById(`relName${i}`).value.trim() || `${queryCat}_${dataset.length+1}_${i+1}`;
+    rawSlots.push(url ? {url,name,status:'pending',product_id:null} : {url:'',name:'',status:'empty',product_id:null});
+  }
+
+  const filled = rawSlots.filter(s=>s.url);
+  if (!filled.length) { toast('Add at least one relevant image URL.','warn'); return; }
+
+  const btn = document.getElementById('submitBtn');
+  const statusEl = document.getElementById('submitStatus');
+  btn.disabled=true; statusEl.textContent='Indexing…';
+
+  for (const s of filled) s.product_id = await uuid5(s.url);
+
+  let res;
+  try {
+    res = await callIndex(filled.map(s=>({name:s.name,image_url:s.url,store:'golden_dataset',mall:'golden_dataset',price:'',product_id:s.product_id})));
+  } catch(e) { toast(`Gateway error: ${e.message}`,'error'); btn.disabled=false; statusEl.textContent=''; return; }
+
+  const failNames = new Set((res.failed||[]).map(f=>f.item||f.name));
+  for (const s of filled) s.status = failNames.has(s.name) ? 'failed' : (res.success>0?'ok':'failed');
+  let okCount=0;
+  for (const s of filled) { if(s.status==='ok'){okCount++;if(okCount>res.success)s.status='failed';} }
+
+  const allSlots = rawSlots.map(s => filled.find(f=>f.url===s.url&&s.url)||s);
+  const okSlots  = allSlots.filter(s=>s.status==='ok');
+
+  const entry = {
+    query_image_url    : queryUrl,
+    query_name         : queryName,
+    query_category_tag : queryCat,
+    relevant_product_ids: okSlots.map(s=>s.product_id),
+    slots              : allSlots,
+    source             : 'google_lens',
+    n_relevant         : okSlots.length,
+    annotated_by       : 'marc',
+    created_at         : new Date().toISOString(),
+  };
+
+  dataset.push(entry); persist();
+
+  const nOk   = okSlots.length;
+  const nFail = allSlots.filter(s=>s.status==='failed').length;
+  statusEl.textContent = `✅ ${nOk} indexed · ${res.skipped||0} skipped · ${nFail} failed`;
+
+  if (nFail>0) toast(`${nFail} link(s) failed — expand the entry below to replace them.`,'warn');
+  else         toast(`Set ${dataset.length} saved! ${nOk}/5 indexed.`,'success');
+
+  renderLog(); updateProgress(); resetForm(); btn.disabled=false;
+  if (nFail>0) setTimeout(()=>openEntry(dataset.length-1),300);
+}
+
+// ─── Retry single slot ─────────────────────────────────────────────────────────
+async function retrySlot(ei,si) {
+  const entry   = dataset[ei];
+  const newUrl  = document.getElementById(`eu-${ei}-${si}`).value.trim();
+  const newName = document.getElementById(`en-${ei}-${si}`).value.trim() || entry.slots[si].name || `item_${si+1}`;
+  if (!newUrl) { toast('Paste a URL first.','warn'); return; }
+  if (newUrl.startsWith('data:')) { toast('Use a real https:// URL, not a base64 image.','error'); return; }
+  if (classifyDomain(newUrl)==='bad') { toast('This domain is blocked. Use ASOS/Zara/H&M.','error'); return; }
+
+  const btn=document.getElementById(`rb-${ei}-${si}`);
+  btn.disabled=true; btn.textContent='…';
+
+  const pid = await uuid5(newUrl);
+  let res;
+  try {
+    res = await callIndex([{name:newName,image_url:newUrl,store:'golden_dataset',mall:'golden_dataset',price:'',product_id:pid}]);
+  } catch(e) { toast(`Gateway: ${e.message}`,'error'); btn.disabled=false; btn.textContent='↻ Retry'; return; }
+
+  const failNames = new Set((res.failed||[]).map(f=>f.item||f.name));
+  const ok = !failNames.has(newName) && (res.success||0)>0;
+
+  entry.slots[si]={url:newUrl,name:newName,status:ok?'ok':'failed',product_id:ok?pid:null};
+  entry.relevant_product_ids=entry.slots.filter(s=>s&&s.status==='ok').map(s=>s.product_id);
+  entry.n_relevant=entry.relevant_product_ids.length;
+
+  persist(); renderLog(); updateProgress();
+  if (ok) toast(`Link ${si+1} fixed! ✅`,'success');
+  else    toast(`Still failed. Try a different URL (ASOS/Zara/H&M).`,'error');
+  setTimeout(()=>openEntry(ei),100);
+}
+
+// ─── Clear slot ────────────────────────────────────────────────────────────────
+function clearSlot(ei,si) {
+  dataset[ei].slots[si]={url:'',name:'',status:'empty',product_id:null};
+  dataset[ei].relevant_product_ids=dataset[ei].slots.filter(s=>s&&s.status==='ok').map(s=>s.product_id);
+  dataset[ei].n_relevant=dataset[ei].relevant_product_ids.length;
+  persist(); renderLog(); setTimeout(()=>openEntry(ei),100); toast('Slot cleared.','warn');
+}
+
+function openEntry(idx)   { const c=document.getElementById(`ec-${idx}`); if(c) c.classList.add('open'); }
+function toggleEntry(idx) { const c=document.getElementById(`ec-${idx}`); if(c) c.classList.toggle('open'); }
+
+// ─── Update category inline ────────────────────────────────────────────────────
+function updateCategory(idx) {
+  dataset[idx].query_category_tag = document.getElementById(`cat-${idx}`).value;
+  persist();
+  const el=document.getElementById(`cat-saved-${idx}`);
+  if(el){el.style.opacity='1';setTimeout(()=>{el.style.opacity='0';},1500);}
+}
+
+// ─── Render log ────────────────────────────────────────────────────────────────
+function renderLog() {
+  const list=document.getElementById('entryList');
+  document.getElementById('entryCount').textContent=`${dataset.length} entries`;
+  if(!dataset.length){list.innerHTML='<div class="empty-state">No entries yet.</div>';return;}
+
+  list.innerHTML=dataset.map((e,i)=>{
+    const n=e.n_relevant;
+    const cls=n>=5?'rel-good':n>=3?'rel-warn':'rel-bad';
+    const lbl=n<5?`⚠ ${n}/5`:`${n}/5`;
+    const anyFailed=(e.slots||[]).some(s=>s&&s.status==='failed');
+    const thumbSrc = e.query_image_url.startsWith('data:') ? e.query_image_url : e.query_image_url;
+
+    const slotsHtml=(e.slots||[]).map((s,si)=>{
+      if(!s||s.status==='empty') return `
+        <div class="slot-item empty">
+          <div style="width:52px;height:52px;display:flex;align-items:center;justify-content:center;color:#333;font-size:22px;flex-shrink:0">＋</div>
+          <div class="slot-info">
+            <div class="slot-status s-empty">Slot ${si+1} — empty</div>
+            <div class="slot-edit">
+              <div class="url-wrap"><input type="text" id="eu-${i}-${si}" placeholder="Paste image URL" /></div>
+              <input type="text" id="en-${i}-${si}" placeholder="Item name" style="font-size:12px;margin-bottom:6px;margin-top:4px" />
+              <div class="slot-edit-row">
+                <button id="rb-${i}-${si}" class="btn btn-primary btn-sm" onclick="retrySlot(${i},${si})">⚡ Index this link</button>
+              </div>
+            </div>
+          </div>
+        </div>`;
+
+      const icon=s.status==='ok'?'✅':'❌';
+      const scls=s.status==='ok'?'s-ok':'s-fail';
+      const smsg=s.status==='ok'?'Indexed successfully':'Failed — paste a new URL below';
+      return `
+        <div class="slot-item ${s.status==='failed'?'failed':''}">
+          <img class="slot-thumb" src="${s.url||''}" onerror="this.style.display='none'" />
+          <div class="slot-info">
+            <div class="slot-name">${s.name||'—'}</div>
+            <div class="slot-url">${s.url||''}</div>
+            <div class="slot-status ${scls}">${icon} ${smsg}</div>
+            ${s.status==='ok'?`<button onclick="clearSlot(${i},${si})" style="background:none;border:none;cursor:pointer;color:#555;font-size:11px;margin-top:2px">✕ remove slot</button>`:''}
+            ${s.status==='failed'?`
+            <div class="slot-edit">
+              <div class="url-wrap"><input type="text" id="eu-${i}-${si}" value="${s.url||''}" placeholder="Paste a new image URL" /></div>
+              <input type="text" id="en-${i}-${si}" value="${s.name||''}" placeholder="Item name" style="font-size:12px;margin-bottom:6px;margin-top:4px" />
+              <div class="slot-edit-row">
+                <button id="rb-${i}-${si}" class="btn btn-primary btn-sm" onclick="retrySlot(${i},${si})">↻ Replace &amp; retry</button>
+                <button class="btn btn-ghost btn-sm" onclick="clearSlot(${i},${si})">✕ Clear slot</button>
+              </div>
+            </div>`:''}
+          </div>
+        </div>`;
+    }).join('');
+
+    return `
+      <div class="entry-card" id="ec-${i}">
+        <div class="entry-header" onclick="toggleEntry(${i})">
+          <img class="entry-thumb" src="${thumbSrc}" onerror="this.style.display='none'" />
+          <div class="entry-info">
+            <div class="entry-name">${e.query_name}</div>
+            <div class="entry-meta">
+              ${e.query_category_tag||'<span style="color:#f87171">⚠ no category</span>'} ·
+              <span class="${cls}">${lbl} relevant</span>
+              ${anyFailed?' · <span style="color:#f87171">⚠ has failed links — click to fix</span>':''}
+              · ${new Date(e.created_at).toLocaleDateString()}
+            </div>
+          </div>
+          <span class="entry-chevron">▶</span>
+          <button class="entry-del-btn" onclick="event.stopPropagation();deleteEntry(${i})" title="Delete entry">✕</button>
+        </div>
+        <div class="entry-body">
+          <div style="display:flex;align-items:center;gap:8px;margin:10px 0">
+            <span style="font-size:11px;color:#666;white-space:nowrap">CATEGORY</span>
+            <select id="cat-${i}" onchange="updateCategory(${i})" style="font-size:12px;padding:5px 10px;width:auto">
+              <option value="">— select —</option>
+              ${['top','sports_bra','pants','leggings','shorts','skirt','dress','sweater','jacket','shoes','hat','bag','jumpsuit'].map(c=>`<option value="${c}"${e.query_category_tag===c?' selected':''}>${c}</option>`).join('')}
+            </select>
+            <span id="cat-saved-${i}" style="font-size:11px;color:#4ade80;opacity:0;transition:opacity 0.4s">✓ saved</span>
+          </div>
+          <div style="font-size:11px;color:#555;margin-bottom:8px">
+            Click <strong style="color:#a78bfa">↻ Replace &amp; retry</strong> on any failed link to swap it out individually.
+          </div>
+          <div class="rel-list">${slotsHtml}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+async function deleteEntry(idx) {
+  const entry = dataset[idx];
+  if(!confirm(`Delete "${entry.query_name}"?\n\nThis will also remove its indexed images from Qdrant.`))return;
+  try {
+    const r = await fetch(`${gw()}/golden-dataset/entry`, {
+      method: 'DELETE',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({query_name: entry.query_name}),
+    });
+    if (!r.ok) {
+      const err = await r.json().catch(()=>({}));
+      toast(`Gateway error: ${err.detail||r.status}`, 'error');
+      return;
+    }
+    const res = await r.json();
+    dataset.splice(idx,1); persist(); renderLog(); updateProgress();
+    toast(`Deleted "${entry.query_name}" (${res.points_removed} images removed from index).`, 'warn');
+  } catch(e) {
+    toast(`Failed to delete: ${e.message}`, 'error');
+  }
+}
+
+function resetForm() {
+  ['queryUrl','queryName'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('queryCategory').value='';
+  document.getElementById('queryPreviewWrap').innerHTML='<div class="img-placeholder">Paste URL below<br/>to preview</div>';
+  ['queryWarn','queryStatus'].forEach(id=>{const e=document.getElementById(id);if(e){e.className='domain-warning';e.textContent='';}});
+  document.getElementById('submitStatus').textContent='';
+  for(let i=0;i<5;i++){
+    ['relUrl','relName'].forEach(p=>{const e=document.getElementById(p+i);if(e)e.value='';});
+    const pr=document.getElementById(`relPrev${i}`);if(pr)pr.innerHTML='<div class="img-placeholder">Paste URL<br/>below</div>';
+    ['relWarn','relStat'].forEach(p=>{const e=document.getElementById(p+i);if(e){e.className='domain-warning';e.textContent='';}});
+  }
+}
+
+function updateProgress() {
+  const t=parseInt(document.getElementById('targetCount').value)||30;
+  const n=dataset.length;
+  document.getElementById('progressBar').style.width=Math.min(100,n/t*100)+'%';
+  document.getElementById('progressCount').textContent=n;
+}
+
+function exportJSON() {
+  if(!dataset.length){toast('Nothing to export.','warn');return;}
+  const clean=dataset.map(e=>({
+    query_image_url      :e.query_image_url,
+    query_name           :e.query_name,
+    query_category_tag   :e.query_category_tag,
+    relevant_product_ids :e.relevant_product_ids,
+    relevant_info        :(e.slots||[]).filter(s=>s&&s.status==='ok').map(s=>({product_id:s.product_id,name:s.name,image_url:s.url,store_name:'golden_dataset'})),
+    source               :e.source,
+    n_relevant           :e.n_relevant,
+    annotated_by         :e.annotated_by,
+    created_at           :e.created_at,
+  }));
+  const blob=new Blob([JSON.stringify(clean,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='golden_dataset.json';a.click();
+  toast(`Exported ${dataset.length} entries`,'success');
+}
+
+function clearAll() {
+  if(!confirm('Delete ALL entries?'))return;
+  dataset=[];persist();renderLog();updateProgress();toast('Cleared.','warn');
+}
+
+let _tt;
+function toast(msg,type=''){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.className='show '+type;
+  clearTimeout(_tt);_tt=setTimeout(()=>{el.className='';},4500);
+}
+
+buildRelGrid();renderLog();updateProgress();
+</script>
+</body>
+</html>

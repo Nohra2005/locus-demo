@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pytest
+      - run: pytest tests/test_vectorizer.py -v
+
+  frontend-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: cd frontend && npm ci && npm run build
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: [unit-tests, frontend-build]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space for the torch image
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+      - name: Build the demo image
+        run: docker build -t locus-demo .
+      - name: Start the stack and run smoke + integration tests against it
+        run: |
+          docker run -d --name locus -p 7860:7860 locus-demo
+          timeout 600 bash -c 'until curl -sf http://localhost:7860/health >/dev/null; do sleep 10; done'
+          pip install pytest requests pillow
+          if [ -f data/catalog.jsonl.gz ]; then
+            GATEWAY_URL=http://localhost:7860 pytest tests/test_e2e.py -v
+          else
+            echo "No catalog file yet: checked the stack starts, skipping search tests"
+          fi
+      - name: Container logs on failure
+        if: failure()
+        run: docker logs locus | tail -100

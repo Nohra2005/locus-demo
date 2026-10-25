@@ -1,0 +1,157 @@
+{
+  "mikesport@gmail.com": {
+    "store_id": "b745b6ea-d20d-4290-a5ab-2e71255fcb14",
+    "email": "mikesport@gmail.com",
+    "password": "$2b$12$ePhZeXGAiiDZEg/HhVJETOI0VsicxKUcFbn379IwtHOCaEiZAiFyy",
+    "store_name": "Mikesport",
+    "mall": "Zalka",
+    "phone": "",
+    "created_at": "2026-05-01T00:00:00",
+    "latitude": 33.9017,
+    "longitude": 35.5709
+  },
+  "forever21@gmail.com": {
+    "store_id": "f12169fd-5e2c-4675-8812-d005eb185734",
+    "email": "forever21@gmail.com",
+    "password": "$2b$12$/sRzsdWRYKD2Ws5NxbdsAOZeuRGbuJHLl0yOT1oNRdORdTZUSjA2u",
+    "store_name": "Forever21",
+    "mall": "City Centre Beirut",
+    "phone": "",
+    "created_at": "2026-05-01T00:00:00",
+    "maps_url": "https://maps.app.goo.gl/5f5GVk3s62jNJcfg8",
+    "latitude": 33.8975,
+    "longitude": 35.5538
+  },
+  "maison123@gmail.com": {
+    "store_id": "c8b4625f-ed59-436c-bd65-65238be6b139",
+    "email": "maison123@gmail.com",
+    "password": "$2b$12$yt/cLyfWeC24vY2I68u1IumPWO5S/nd/xNZa4LjtTotzP3h00KLNu",
+    "store_name": "Maison123",
+    "mall": "ABC Achrafieh",
+    "phone": "",
+    "created_at": "2026-05-01T00:00:00",
+    "latitude": 33.8864,
+    "longitude": 35.523
+  },
+  "winnerforce@gmail.com": {
+    "store_id": "73dd8c12-3490-4b57-bc52-07bf5c582592",
+    "email": "winnerforce@gmail.com",
+    "password": "$2b$12$IaYYt8O92z51Bkvlc1MgfOlEM.xTZGnLt.LF5AVV4psCCrDkd3KVi",
+    "store_name": "Winnerforce",
+    "mall": "CityMall Beirut",
+    "phone": "",
+    "created_at": "2026-05-01T00:00:00",
+    "latitude": 33.9047,
+    "longitude": 35.5541
+  },
+  "forever21.abc.achrafieh@gmail.com": {
+    "store_id": "cf2f43e0-c208-457a-bbdf-9a2e616b265d",
+    "email": "forever21.abc.achrafieh@gmail.com",
+    "password": "$2b$12$fWwoSefU.XnC.hyXRDCtcOjN9CmGdNpJNy55rm91Aqi1TRMe.mBUW",
+    "store_name": "Forever21 ABC Achrafieh",
+    "mall": "ABC Achrafieh",
+    "phone": "",
+    "created_at": "2026-05-02T00:00:00",
+    "latitude": 33.8864,
+    "longitude": 35.523
+  },
+  "forever21.abc.dbayeh@gmail.com": {
+    "store_id": "8d3bffd5-97bc-4725-a91c-bd325d009077",
+    "email": "forever21.abc.dbayeh@gmail.com",
+    "password": "$2b$12$fWwoSefU.XnC.hyXRDCtcOjN9CmGdNpJNy55rm91Aqi1TRMe.mBUW",
+    "store_name": "Forever21 ABC Dbayeh",
+    "mall": "ABC Dbayeh",
+    "phone": "",
+    "created_at": "2026-05-02T00:00:00",
+    "latitude": 33.9257,
+    "longitude": 35.579
+  },
+  "forever21.citycentre@gmail.com": {
+    "store_id": "46152414-5b8d-4dd6-b164-6d97ce7c95b2",
+    "email": "forever21.citycentre@gmail.com",
+    "password": "$2b$12$fWwoSefU.XnC.hyXRDCtcOjN9CmGdNpJNy55rm91Aqi1TRMe.mBUW",
+    "store_name": "Forever21 City Centre",
+    "mall": "City Centre Beirut",
+    "phone": "",
+    "created_at": "2026-05-02T00:00:00",
+    "latitude": 33.8975,
+    "longitude": 35.5538
+  },
+  "forever21.lemall.sinelfil@gmail.com": {
+    "store_id": "80daf9c4-01cc-4370-8427-1bdbad1bbbe2",
+    "email": "forever21.lemall.sinelfil@gmail.com",
+    "password": "$2b$12$fWwoSefU.XnC.hyXRDCtcOjN9CmGdNpJNy55rm91Aqi1TRMe.mBUW",
+    "store_name": "Forever21 Le Mall Sin El Fil",
+    "mall": "Le Mall Sin El Fil",
+    "phone": "",
+    "created_at": "2026-05-02T00:00:00",
+    "latitude": 33.8815,
+    "longitude": 35.5391
+  },
+  "forever21.lemall.dbayeh@gmail.com": {
+    "store_id": "248470f8-de65-40fa-b08f-c67947fedafb",
+    "email": "forever21.lemall.dbayeh@gmail.com",
+    "password": "$2b$12$fWwoSefU.XnC.hyXRDCtcOjN9CmGdNpJNy55rm91Aqi1TRMe.mBUW",
+    "store_name": "Forever21 Le Mall Dbayeh",
+    "mall": "Le Mall Dbayeh",
+    "phone": "",
+    "created_at": "2026-05-02T00:00:00",
+    "latitude": 33.9261,
+    "longitude": 35.5813
+  },
+  "forever21.verdun@gmail.com": {
+    "store_id": "6843d821-776f-4bc3-9ecb-227bc5ad4d44",
+    "email": "forever21.verdun@gmail.com",
+    "password": "$2b$12$fWwoSefU.XnC.hyXRDCtcOjN9CmGdNpJNy55rm91Aqi1TRMe.mBUW",
+    "store_name": "Forever21 Verdun",
+    "mall": "Verdun 732",
+    "phone": "",
+    "created_at": "2026-05-02T00:00:00",
+    "latitude": 33.8776,
+    "longitude": 35.4987
+  },
+  "forever21.souks@gmail.com": {
+    "store_id": "bf1c8b1a-03e6-41f4-8a37-73faefef4ae7",
+    "email": "forever21.souks@gmail.com",
+    "password": "$2b$12$fWwoSefU.XnC.hyXRDCtcOjN9CmGdNpJNy55rm91Aqi1TRMe.mBUW",
+    "store_name": "Forever21 Beirut Souks",
+    "mall": "Beirut Souks",
+    "phone": "",
+    "created_at": "2026-05-02T00:00:00",
+    "latitude": 33.8954,
+    "longitude": 35.5017
+  },
+  "forever21.hamra@gmail.com": {
+    "store_id": "963a54d5-2337-4457-99d8-516abb37755e",
+    "email": "forever21.hamra@gmail.com",
+    "password": "$2b$12$fWwoSefU.XnC.hyXRDCtcOjN9CmGdNpJNy55rm91Aqi1TRMe.mBUW",
+    "store_name": "Forever21 Hamra",
+    "mall": "Hamra Street",
+    "phone": "",
+    "created_at": "2026-05-02T00:00:00",
+    "latitude": 33.8952,
+    "longitude": 35.4868
+  },
+  "forever21.gefinor@gmail.com": {
+    "store_id": "7976ce31-0b46-445f-9c65-5ea10bde1408",
+    "email": "forever21.gefinor@gmail.com",
+    "password": "$2b$12$fWwoSefU.XnC.hyXRDCtcOjN9CmGdNpJNy55rm91Aqi1TRMe.mBUW",
+    "store_name": "Forever21 Gefinor",
+    "mall": "Gefinor Center",
+    "phone": "",
+    "created_at": "2026-05-02T00:00:00",
+    "latitude": 33.885,
+    "longitude": 35.496
+  },
+  "forever21.zalka@gmail.com": {
+    "store_id": "6ff8a9ec-1c2c-4136-b826-99272438708d",
+    "email": "forever21.zalka@gmail.com",
+    "password": "$2b$12$fWwoSefU.XnC.hyXRDCtcOjN9CmGdNpJNy55rm91Aqi1TRMe.mBUW",
+    "store_name": "Forever21 Zalka",
+    "mall": "Zalka Highway",
+    "phone": "",
+    "created_at": "2026-05-02T00:00:00",
+    "latitude": 33.9052,
+    "longitude": 35.566
+  }
+}

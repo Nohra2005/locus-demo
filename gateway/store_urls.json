@@ -1,0 +1,5 @@
+{
+  "_comment": "Maps store_name (exactly as stored in Qdrant) to its scrape URL. Used by repair_broken_links.py to recover broken product images. Keys are case-sensitive.",
+  "ExampleShopifyStore": "https://example.myshopify.com/collections/all",
+  "ExampleRegularStore": "https://www.example.com/products"
+}
