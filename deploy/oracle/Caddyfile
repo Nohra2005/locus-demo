@@ -1,0 +1,5 @@
+# Free automatic HTTPS. DOMAIN is <public-ip-with-dashes>.sslip.io unless you own a domain.
+{$DOMAIN} {
+	encode gzip
+	reverse_proxy locus:7860
+}

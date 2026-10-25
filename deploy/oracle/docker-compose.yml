@@ -1,0 +1,23 @@
+# Runs on the Oracle Cloud VM (Always Free, Ampere ARM). Started by setup.sh,
+# updated by the "Deploy to Oracle" GitHub workflow.
+services:
+  locus:
+    image: ghcr.io/nohra2005/locus-demo:latest
+    restart: unless-stopped
+    env_file: .env          # GOOGLE_API_KEY, GROQ_API_KEY (optional)
+    expose: ["7860"]
+    mem_limit: 8g
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    environment:
+      - DOMAIN=${DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    depends_on: [locus]
+
+volumes:
+  caddy_data:

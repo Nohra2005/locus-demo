@@ -2,7 +2,7 @@
 
 Take a photo of an outfit, tap the item you want, and Locus finds similar products in stores near you.
 
-**Try it:** [Live demo on Hugging Face](https://huggingface.co/spaces/TatianaNohra/locus) (if it was asleep, the first load takes about a minute while the models start)
+**Try it:** live demo link coming soon (hosted on Oracle Cloud's free tier)
 
 <!-- Demo video: drag the .mp4 into this README on GitHub to embed it here -->
 
@@ -64,7 +64,8 @@ About 150 tests across five files:
 GitHub Actions in this repo:
 
 - **`ci.yml`** runs unit tests, builds the frontend, builds the full Docker image, starts it, and runs the end-to-end tests against the running container.
-- **`deploy-space.yml`** runs after CI passes on `main`. It pushes the code to the Hugging Face Space, waits for it to rebuild, and runs the end-to-end tests against the live demo.
+- **`deploy-oracle.yml`** runs after CI passes on `main`. It builds the ARM image, publishes it to GitHub's container registry, restarts it on the Oracle Cloud server over SSH, and runs the end-to-end tests against the live site.
+- **`build-catalog.yml`** runs weekly. It scrapes the stores in `data/stores.json`, embeds every product with the real visual engine, and commits the new catalog.
 
 In the original production setup on Azure, the pipeline also rolled the three images onto Kubernetes (K3s) and ran an **LLM-judge quality gate** (`mlops/ci_eval.py`): the build failed if search quality dropped below the saved baseline in `mlops/ci_baseline.json`.
 
@@ -88,7 +89,7 @@ Every run is logged to MLflow, including the judge prompt version.
 | `mlops/` | Evaluation, LoRA training, MLflow tracking, judge calibration, golden dataset tools |
 | `gateway/repair_broken_links.py` | Scheduled job that finds dead product images and hides them from results |
 
-The Azure deployment cost about $40 a month, so it is shut down. This demo runs the same gateway, visual engine and frontend code in one container on Hugging Face's free tier, with the catalog loaded from a file.
+The Azure deployment cost about $40 a month, so it is shut down. This demo runs the same gateway, visual engine and frontend code in one container on an Oracle Cloud Always Free ARM server (4 cores, 24 GB), behind Caddy for HTTPS, with the catalog loaded from a file. Hosting cost: $0. Setup: `deploy/oracle/setup.sh`.
 
 ## What the demo changes
 
